@@ -1,0 +1,49 @@
+<html>
+  <head>
+<style>
+body {
+  font-family: verdana;
+  padding: 1rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.departments {
+  display: flex;
+}
+
+.departments > li {
+  border-right: solid 1px black;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+.department-title {
+  text-transform: uppercase;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+}
+
+li > * {
+  margin: 0.5rem;
+}
+
+@media (max-width: 600px){
+  .departments {
+    flex-direction: column;
+  }
+}
+</style>
+    <script src='/dist/main.js' defer></script>
+  </head>
+  <body>
+    <div id='root'></div>
+  </body>
+</html>
