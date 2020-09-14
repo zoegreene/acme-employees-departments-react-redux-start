@@ -1,17 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { thunkedDestroyEmployee, thunkedRemoveFromDepartment } from './store';
 
-const Employee = ({ employee, destroyEmployee, removeFromDepartment })=> {
+// must reload employees after destroy employee and remove from dept
+
+const Employee = ({ name, id, departmentId })=> {
   return (
-    <li key={ employee.id }>
-      { employee.name }
-      <button onClick={ ()=> destroyEmployee(employee)}>x</button>
-      {
-        !!removeFromDepartment && (
-          <button onClick={ ()=> removeFromDepartment(employee)}>Remove From Department</button>
-        )
-      }
+    <li>
+      { name }
+      { <button onClick={ ()=> thunkedDestroyEmployee(id)}>x</button> }
+      { departmentId !== null ? <button onClick={ ()=> thunkedRemoveFromDepartment(id)}>Remove From Department</button> : ''}
     </li>
   );
 };
 
-export default Employee;
+const mapDispatchToProps = dispatch => {
+  return {
+    thunkedDestroyEmployee: function(id) {
+      dispatch(thunkedDestroyEmployee(id));
+    },
+    thunkedRemoveFromDepartment: function(id) {
+      dispatch(thunkedRemoveFromDepartment(id));
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Employee);
